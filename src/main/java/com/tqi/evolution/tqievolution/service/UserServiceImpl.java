@@ -32,12 +32,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        email = email.trim().toLowerCase();
-        return userRepository.findByEmail(email);
-    }
-
-    @Override
     public User updateIncome(long id, BigDecimal updatedIncome) throws UserNotFoundException {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         user.setIncome(updatedIncome);

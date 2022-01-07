@@ -11,7 +11,6 @@ public interface UserService {
 
     User add(User user) throws EmailAlreadyRegisteredException;
     User findById(long id);
-    Optional<User> findByEmail(String email);
     //User update(long id, User user) throws UserNotFoundException;
     User updateIncome(long id, BigDecimal updatedIncome) throws UserNotFoundException;
 

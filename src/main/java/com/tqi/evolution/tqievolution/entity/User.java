@@ -1,6 +1,5 @@
 package com.tqi.evolution.tqievolution.entity;
 
-import com.tqi.evolution.tqievolution.dto.AuthenticadedUserDTO;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,7 +34,7 @@ public class User {
     @Column(nullable = false)
     private BigDecimal income;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")

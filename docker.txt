@@ -1,0 +1,1 @@
+docker run --name mysql_container -p 3306:3306 -e MYSQL_ROOT_PASSWORD=tqi_evo_pw -d mysql:latest

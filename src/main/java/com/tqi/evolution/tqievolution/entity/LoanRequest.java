@@ -12,7 +12,8 @@ public class LoanRequest {
     private long request_id;
 
     @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "user_id")
+    //@JoinColumn(name = "user", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column(nullable = false)

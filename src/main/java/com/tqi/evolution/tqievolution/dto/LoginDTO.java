@@ -1,9 +1,11 @@
 package com.tqi.evolution.tqievolution.dto;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@AllArgsConstructor @Getter
 public class LoginDTO {
 
     @NotNull

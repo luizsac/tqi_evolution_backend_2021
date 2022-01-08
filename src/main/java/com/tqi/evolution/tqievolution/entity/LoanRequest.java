@@ -1,18 +1,20 @@
 package com.tqi.evolution.tqievolution.entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity(name = "loan_request")
+@NoArgsConstructor @EqualsAndHashCode @Getter @Setter @ToString
 public class LoanRequest {
 
     @Id
-    @GeneratedValue
-    private long request_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long requestId;
 
     @ManyToOne
-    //@JoinColumn(name = "user", referencedColumnName = "user_id")
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -20,7 +22,7 @@ public class LoanRequest {
     private BigDecimal amount;
 
     @Column(name = "first_installment_dt", nullable = false)
-    private Date firstInstallmentDt;
+    private LocalDate firstInstallmentDt;
 
     @Column(name = "number_of_installments", nullable = false)
     private int numberOfInstallments;

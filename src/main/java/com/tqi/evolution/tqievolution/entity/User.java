@@ -13,8 +13,9 @@ import java.util.List;
 @NoArgsConstructor @EqualsAndHashCode @Getter @Setter
 public class User {
 
-    @Id @GeneratedValue
-    private long user_id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long userId;
 
     @Column(nullable = false, length = 50)
     private String name;
@@ -40,9 +41,19 @@ public class User {
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     List<LoanRequest> loanRequests;
 
+    public User(String name, String email, String cpf, String rg, String address, BigDecimal income, String password) {
+        this.name = name;
+        this.email = email;
+        this.cpf = cpf;
+        this.rg = rg;
+        this.address = address;
+        this.income = income;
+        this.password = password;
+    }
+
 
     public String toString() {
-        return "User(user_id=" + this.user_id + ", name=" + this.name + ", email=" + this.email + ", cpf=" + this.cpf + ", rg=" + this.rg + ", address=" + this.address + ", income=" + this.income + ")";
+        return "User(user_id=" + this.userId + ", name=" + this.name + ", email=" + this.email + ", cpf=" + this.cpf + ", rg=" + this.rg + ", address=" + this.address + ", income=" + this.income + ")";
     }
 
 

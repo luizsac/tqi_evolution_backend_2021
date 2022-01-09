@@ -15,4 +15,5 @@ public interface UserService {
     //User update(long id, User user) throws UserNotFoundException;
     //User updateIncome(long id, BigDecimal updatedIncome) throws UserNotFoundException;
     User authenticate(LoginDTO loginInfo) throws BadCredentialsException;
+
 }

@@ -1,21 +1,20 @@
 package com.tqi.evolution.tqievolution.service;
 
 import com.tqi.evolution.tqievolution.entity.LoanRequest;
-import com.tqi.evolution.tqievolution.entity.User;
 import com.tqi.evolution.tqievolution.exception.InvalidLoanRequestParametersException;
+import com.tqi.evolution.tqievolution.exception.LoanRequestNotFoundException;
 import com.tqi.evolution.tqievolution.repository.LoanRequestRepository;
-import com.tqi.evolution.tqievolution.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class LoanRequestServiceImpl implements LoanRequestService {
 
     private final LoanRequestRepository loanRequestRepository;
-    private final UserRepository userRepository;
 
     @Override
     public LoanRequest create(LoanRequest loanRequest) throws InvalidLoanRequestParametersException {
@@ -28,7 +27,12 @@ public class LoanRequestServiceImpl implements LoanRequestService {
     }
 
     @Override
-    public LoanRequest getLoanRequestById(long id) {
-        return null;
+    public LoanRequest getLoanRequestById(long id) throws LoanRequestNotFoundException {
+        return loanRequestRepository.findById(id).orElseThrow(LoanRequestNotFoundException::new);
+    }
+
+    @Override
+    public List<LoanRequest> getLoanRequestsByUserId(long id) {
+        return loanRequestRepository.findByUserId(id);
     }
 }

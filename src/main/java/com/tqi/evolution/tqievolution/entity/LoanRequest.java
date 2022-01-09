@@ -1,13 +1,16 @@
 package com.tqi.evolution.tqievolution.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity(name = "loan_request")
-@NoArgsConstructor @EqualsAndHashCode @Getter @Setter @ToString
+@NoArgsConstructor @Getter @Setter @ToString
 public class LoanRequest {
 
     @Id
@@ -26,5 +29,11 @@ public class LoanRequest {
 
     @Column(name = "number_of_installments", nullable = false)
     private int numberOfInstallments;
+
+    public LoanRequest(BigDecimal amount, LocalDate firstInstallmentDt, int numberOfInstallments) {
+        this.amount = amount;
+        this.firstInstallmentDt = firstInstallmentDt;
+        this.numberOfInstallments = numberOfInstallments;
+    }
 
 }

@@ -3,7 +3,7 @@ package com.tqi.evolution.tqievolution.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.UNAUTHORIZED)
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BadCredentialsException extends Exception {
 
     public BadCredentialsException() {

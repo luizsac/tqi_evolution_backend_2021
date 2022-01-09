@@ -3,7 +3,6 @@ package com.tqi.evolution.tqievolution.dto;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @AllArgsConstructor @Getter
 public class LoginDTO {

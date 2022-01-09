@@ -1,6 +1,5 @@
 package com.tqi.evolution.tqievolution.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(name = "user")
-@NoArgsConstructor @EqualsAndHashCode @Getter @Setter
+@NoArgsConstructor @Getter @Setter
 public class User {
 
     @Id
@@ -57,7 +56,8 @@ public class User {
     }
 
 
-    /*public void updateFields(User other) {
+    /*
+    public void updateFields(User other) {
         setName(other.getName());
         setEmail(other.getEmail());
         setCpf(other.getCpf());

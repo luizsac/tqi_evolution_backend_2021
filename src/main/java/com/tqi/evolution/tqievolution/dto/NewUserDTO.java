@@ -3,12 +3,10 @@ package com.tqi.evolution.tqievolution.dto;
 import com.sun.istack.NotNull;
 import com.tqi.evolution.tqievolution.entity.User;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 
-@AllArgsConstructor @Getter @Setter
+@AllArgsConstructor
 public class NewUserDTO {
 
     @NotNull

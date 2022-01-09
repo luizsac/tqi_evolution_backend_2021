@@ -3,7 +3,6 @@ package com.tqi.evolution.tqievolution.resource;
 import com.tqi.evolution.tqievolution.dto.AuthenticatedUserDTO;
 import com.tqi.evolution.tqievolution.dto.LoginDTO;
 import com.tqi.evolution.tqievolution.exception.BadCredentialsException;
-import com.tqi.evolution.tqievolution.exception.UserNotFoundException;
 import com.tqi.evolution.tqievolution.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

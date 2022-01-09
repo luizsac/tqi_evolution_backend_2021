@@ -3,7 +3,6 @@ package com.tqi.evolution.tqievolution.dto;
 import com.tqi.evolution.tqievolution.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.math.BigDecimal;
 

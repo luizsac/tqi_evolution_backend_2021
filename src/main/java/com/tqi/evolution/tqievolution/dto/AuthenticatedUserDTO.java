@@ -4,7 +4,6 @@ import com.tqi.evolution.tqievolution.entity.LoanRequest;
 import com.tqi.evolution.tqievolution.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 

@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "user")
@@ -37,10 +38,16 @@ public class User {
     @Column(nullable = false, length = 100)
     private String password;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Column(name = "role_id")
+    private List<String> roles = new ArrayList<>();
+
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     List<LoanRequest> loanRequests;
 
-    public User(String name, String email, String cpf, String rg, String address, BigDecimal income, String password) {
+    public User(String name, String email, String cpf, String rg,
+                String address, BigDecimal income, String password, List<String> roles) {
         this.name = name;
         this.email = email;
         this.cpf = cpf;
@@ -48,23 +55,13 @@ public class User {
         this.address = address;
         this.income = income;
         this.password = password;
+        this.roles = roles;
     }
 
 
     public String toString() {
-        return "User(user_id=" + this.userId + ", name=" + this.name + ", email=" + this.email + ", cpf=" + this.cpf + ", rg=" + this.rg + ", address=" + this.address + ", income=" + this.income + ")";
+        return "User(user_id=" + this.userId + ", name=" + this.name + ", email=" + this.email + ", cpf=" +
+                this.cpf + ", rg=" + this.rg + ", address=" + this.address + ", income=" + this.income + ")";
     }
-
-
-    /*
-    public void updateFields(User other) {
-        setName(other.getName());
-        setEmail(other.getEmail());
-        setCpf(other.getCpf());
-        setRg(other.getRg());
-        setAddress(other.getAddress());
-        setIncome(other.getIncome());
-        setPassword(other.getPassword());
-    }*/
 
 }

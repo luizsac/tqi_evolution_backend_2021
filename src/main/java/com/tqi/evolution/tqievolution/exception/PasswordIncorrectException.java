@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class BadCredentialsException extends Exception {
+public class PasswordIncorrectException extends Exception {
 
-    public BadCredentialsException() {
-        super("Requested User was not found in the database");
+    public PasswordIncorrectException() {
+        super("Entered password is incorrect");
     }
 
 }

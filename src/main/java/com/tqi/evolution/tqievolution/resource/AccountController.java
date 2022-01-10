@@ -20,7 +20,7 @@ public class AccountController {
 
     @PostMapping("/create")
     public ResponseEntity<CreatedUserDTO> createAccount(@RequestBody NewUserDTO newUserDTO)
-                                                                            throws EmailAlreadyRegisteredException {
+            throws EmailAlreadyRegisteredException {
         var createdUserDTO = CreatedUserDTO.toDto(userService.add(newUserDTO.toUser()));
         return new ResponseEntity<>(createdUserDTO, HttpStatus.CREATED);
     }

@@ -5,6 +5,7 @@ import com.tqi.evolution.tqievolution.entity.User;
 import lombok.AllArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @AllArgsConstructor
 public class NewUserDTO {
@@ -29,6 +30,9 @@ public class NewUserDTO {
     @NotNull
     private String password;
 
+    @NotNull
+    private List<String> roles;
+
     public User toUser() {
         return new User(
                 this.name,
@@ -37,7 +41,8 @@ public class NewUserDTO {
                 this.rg,
                 this.address,
                 this.income,
-                this.password
+                this.password,
+                this.roles
         );
     }
 

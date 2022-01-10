@@ -4,13 +4,17 @@ import com.tqi.evolution.tqievolution.dto.AuthenticatedUserDTO;
 import com.tqi.evolution.tqievolution.dto.LoginDTO;
 import com.tqi.evolution.tqievolution.entity.User;
 import com.tqi.evolution.tqievolution.exception.EmailAlreadyRegisteredException;
+import com.tqi.evolution.tqievolution.exception.PasswordIncorrectException;
 import com.tqi.evolution.tqievolution.exception.UserNotFoundException;
-import com.tqi.evolution.tqievolution.exception.BadCredentialsException;
 import com.tqi.evolution.tqievolution.repository.UserRepository;
-import com.tqi.evolution.tqievolution.util.Encrypter;
+import com.tqi.evolution.tqievolution.security.JWTCreator;
+import com.tqi.evolution.tqievolution.security.JWTObject;
+import com.tqi.evolution.tqievolution.security.SecurityConfig;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -18,6 +22,8 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private SecurityConfig securityConfig;
 
     @Override
     public User add(User user) throws EmailAlreadyRegisteredException {
@@ -25,36 +31,34 @@ public class UserServiceImpl implements UserService {
             throw new EmailAlreadyRegisteredException();
         }
 
-        user.setPassword(Encrypter.encrypt(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }
 
     @Override
-    public User authenticate(LoginDTO loginDTO) throws BadCredentialsException {
-        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getEmail());
+    public AuthenticatedUserDTO authenticate(LoginDTO loginDTO) throws PasswordIncorrectException, UserNotFoundException {
+        Optional<User> userOptional = userRepository.findByEmail(loginDTO.getUsername());
 
-        String encryptedPassword = Encrypter.encrypt(loginDTO.getPassword());
-        if (userOptional.isEmpty() || !userOptional.get().getPassword().equals(encryptedPassword)) {
-            throw new BadCredentialsException();
+        if (userOptional.isEmpty()) {
+            throw new UserNotFoundException();
         }
 
-        return userOptional.get();
+        boolean passwordMatches = passwordEncoder.matches(loginDTO.getPassword(), userOptional.get().getPassword());
+        if (!passwordMatches) {
+            throw new PasswordIncorrectException();
+        }
+
+        JWTObject jwtObject = new JWTObject(
+                userOptional.get().getEmail(),
+                new Date(System.currentTimeMillis()),
+                new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION),
+                userOptional.get().getRoles()
+        );
+
+        String token = JWTCreator.create(SecurityConfig.PREFIX, SecurityConfig.KEY, jwtObject);
+
+        return AuthenticatedUserDTO.toDTO(userOptional.get(), token);
     }
-
-    /*@Override
-    public User updateIncome(long id, BigDecimal updatedIncome) throws UserNotFoundException {
-        var user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException());
-        user.setIncome(updatedIncome);
-
-        return userRepository.save(user);
-    }*/
-
-    /*public User update(long id, User user) throws UserNotFoundException {
-        User recordedUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
-        user.setPassword(Encrypter.encrypt(user.getPassword()));
-        recordedUser.updateFields(user);
-        return userRepository.save(recordedUser);
-    }*/
 
 }

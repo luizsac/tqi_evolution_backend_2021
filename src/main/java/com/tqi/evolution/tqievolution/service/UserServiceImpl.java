@@ -37,7 +37,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AuthenticatedUserDTO authenticate(LoginDTO loginDTO) throws PasswordIncorrectException, UserNotFoundException {
+    public AuthenticatedUserDTO authenticate(LoginDTO loginDTO)
+            throws PasswordIncorrectException, UserNotFoundException {
         Optional<User> userOptional = userRepository.findByEmail(loginDTO.getUsername());
 
         if (userOptional.isEmpty()) {

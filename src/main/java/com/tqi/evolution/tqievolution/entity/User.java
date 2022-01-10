@@ -1,5 +1,6 @@
 package com.tqi.evolution.tqievolution.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,6 +44,7 @@ public class User {
     @Column(name = "role_id")
     private List<String> roles = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     List<LoanRequest> loanRequests;
 

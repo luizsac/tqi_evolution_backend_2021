@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LoanRequestRepository extends JpaRepository<LoanRequest, Long> {
 
-    @Query(value = "SELECT * FROM loan_request WHERE user_id = ?1", nativeQuery = true)
-    List<LoanRequest> findByUserId(long id);
+    @Query("SELECT lr FROM loan_request lr JOIN lr.user u ON u.email = ?1")
+    List<LoanRequest> findByUserUsername(String username);
 
 }

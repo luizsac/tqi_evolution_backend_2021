@@ -11,13 +11,10 @@ public class AuthenticatedUserDTO {
 
     private String username;
 
-    private String token;
-
-    public static AuthenticatedUserDTO toDTO(User user, String token) {
+    public static AuthenticatedUserDTO toDTO(User user, String email) {
         return new AuthenticatedUserDTO(
                 user.getName(),
-                user.getEmail(),
-                token
+                user.getEmail()
         );
     }
 

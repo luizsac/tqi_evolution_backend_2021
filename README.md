@@ -101,7 +101,8 @@ Execute a aplicação: `.\gradlew bootRun` no Windows ou `./gradlew bootRun` no 
 <pre>
 {
     "name": "Jon Snow",
-    "username": "snow@nightswatch.com"
+    "username": "snow@nightswatch.com",
+    "token": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzbm93QG5pZ2h0c3dhdGNoLmNvbSIsImlhdCI6MTY0NjI3MDg0NSwiZXhwIjoxNjQ2Mjc0NDQ1LCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXX0.xRFYAIx_c-9vZ02RoA6ctjLOg5fiy87nQIEYpn-P1fkQ8GDkgGU9QzAeCDhUWFPGJaICqzM7h0r47O-kVWD5aQ"
 }
 </pre>
 

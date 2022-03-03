@@ -8,13 +8,14 @@ import lombok.Getter;
 public class AuthenticatedUserDTO {
 
     private String name;
-
     private String username;
+    private String token;
 
-    public static AuthenticatedUserDTO toDTO(User user, String email) {
+    public static AuthenticatedUserDTO toDTO(User user, String token) {
         return new AuthenticatedUserDTO(
                 user.getName(),
-                user.getEmail()
+                user.getEmail(),
+                token
         );
     }
 
